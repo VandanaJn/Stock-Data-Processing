@@ -1,5 +1,5 @@
 import csv
-from proj import stock
+from domain import stock
 
 
 def readstockcsv(fname):
