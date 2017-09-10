@@ -1,5 +1,5 @@
 import csv
-from domain import stock
+from domain import Stock
 
 
 def readstockcsv(fname):
@@ -8,7 +8,7 @@ def readstockcsv(fname):
     with open(fname) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            stocks.append(stock.stock(row['Date'], float(row['Open']), float(row['High']),
+            stocks.append(Stock.Stock(row['Date'], float(row['Open']), float(row['High']),
                                       float(row['Low']), float(row['Close']), 
                                       float(row['Adj Close']), int(row['Volume'])))
         return stocks
