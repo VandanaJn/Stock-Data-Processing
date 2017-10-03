@@ -1,9 +1,10 @@
 '''test class'''
 import unittest
-from Roman import int_to_roman
+from RomanConvert import int_to_roman, dollar_to_ancient_roman
 
-class TestRoman(unittest.TestCase):
-    '''TestRoman - Tests Roman'''
+
+class TestRomanConvert(unittest.TestCase):
+    '''TestRomanConvert - Tests RomanConvert'''
 
     def test_int_to_roman_1_10(self):
         """int_to_roman - tests iputs 1 to 10"""
@@ -66,6 +67,20 @@ class TestRoman(unittest.TestCase):
         self.assertEqual('MM', int_to_roman(2000))
         self.assertEqual('MMM', int_to_roman(3000))
         self.assertEqual('MMMCMXCIX', int_to_roman(3999))
+
+    def test_dollar_to_ancient_roman(self):
+        """test for converting dollar_to_cents with decimal trancation"""
+
+        self.assertEqual('XII rocks', dollar_to_ancient_roman(12.0))
+        self.assertEqual('V rocks and VI pebbles',
+                         dollar_to_ancient_roman(5.6))
+        self.assertEqual('V rocks and VI pebbles',
+                         dollar_to_ancient_roman(5.65))
+        self.assertEqual('V rocks', dollar_to_ancient_roman(5.06))
+        self.assertEqual('NO rocks', dollar_to_ancient_roman(0.0))
+        self.assertEqual('NO rocks and V pebbles',
+                         dollar_to_ancient_roman(0.5))
+
 
 if __name__ == '__main__':
     unittest.main(exit=False)
