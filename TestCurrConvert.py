@@ -1,10 +1,16 @@
 '''test class'''
 import unittest
-from RomanConvert import int_to_roman, dollar_to_ancient_roman
+import collections
+from CurrConvert import int_to_roman, dollar_to_ancient_roman, convert, convert_prices, convert_prices_an_roman
 
+class TestCurrConvert(unittest.TestCase):
+    '''TestCurrConvert - Tests CurrConvert'''
 
-class TestRomanConvert(unittest.TestCase):
-    '''TestRomanConvert - Tests RomanConvert'''
+    def test_convert(self):
+        """test_convert - should convert currency as per exchange rate"""
+        self.assertEqual(.7578, convert(1, .7578))
+        self.assertEqual(1.5156, convert(2, .7578))
+        self.assertEqual(1.8945, convert(2.5, .7578))
 
     def test_int_to_roman_1_10(self):
         """int_to_roman - tests iputs 1 to 10"""
@@ -81,6 +87,35 @@ class TestRomanConvert(unittest.TestCase):
         self.assertEqual('NO rocks and V pebbles',
                          dollar_to_ancient_roman(0.5))
 
+    def test_convert_prices(self):
+        """test_convert_prices - should convert prices for dictionary object"""
+        # Date,Open,High,Low,Close,Adj Close,Volume
+        obj1 = collections.OrderedDict(
+            [('Date', '2016-08-01'), ('Open', '30'), ('High', '50'), ('Low', '20'),
+             ('Close', '25'), ('Adj Close', '30'), ('Volume', '100')])
+        convert_prices(obj1, 2)
+        self.assertEqual('2016-08-01', obj1["Date"])
+        self.assertEqual(60, obj1["Open"])
+        self.assertEqual(100, obj1["High"])
+        self.assertEqual(40, obj1["Low"])
+        self.assertEqual(50, obj1["Close"])
+        self.assertEqual(60, obj1["Adj Close"])
+        self.assertEqual('100', obj1["Volume"])
+
+    def test_convert_prices_an_roman(self):
+        """test_convert_prices - should convert prices for dictionary object"""
+        # Date,Open,High,Low,Close,Adj Close,Volume
+        obj1 = collections.OrderedDict(
+            [('Date', '2016-08-01'), ('Open', '30.5'), ('High', '50'), ('Low', '20'),
+             ('Close', '25'), ('Adj Close', '35'), ('Volume', '100')])
+        convert_prices_an_roman(obj1)
+        self.assertEqual('2016-08-01', obj1["Date"])
+        self.assertEqual("XXX rocks and V pebbles", obj1["Open"])
+        self.assertEqual("L rocks", obj1["High"])
+        self.assertEqual("XX rocks", obj1["Low"])
+        self.assertEqual("XXV rocks", obj1["Close"])
+        self.assertEqual("XXXV rocks", obj1["Adj Close"])
+        self.assertEqual('100', obj1["Volume"])
 
 if __name__ == '__main__':
     unittest.main(exit=False)

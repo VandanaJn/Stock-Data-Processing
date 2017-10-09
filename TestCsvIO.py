@@ -3,7 +3,6 @@ import unittest
 import collections
 from CsvIO import read_stock_csv, write_stock_csv
 
-
 class TestCsvIO(unittest.TestCase):
     """TestCsvIO - Tests stock io"""
 
@@ -20,6 +19,7 @@ class TestCsvIO(unittest.TestCase):
         self.assertEqual('170149200', stocks[0]["Volume"])
 
     def test_write_stock_csv(self):
+        """test_write_stock_csv - should write stocks list to csv file"""
         obj1 = collections.OrderedDict(
             [('a', 'A1'), ('b', 'B1'), ('c', 'C1')])
         obj2 = collections.OrderedDict(
