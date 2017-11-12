@@ -36,18 +36,20 @@ def dollar_to_ancient_roman(val):
     else:
         return "{noRocks} rocks".format(noRocks=rock_format)
 
-def convert_prices(obj: dict, exchange):
+def convert_prices(stocks, exchange):
     """converts curreny values as per exchange rates in Dict object"""
-    obj['Open'] = convert(float(obj['Open']), exchange)
-    obj['High'] = convert(float(obj['High']), exchange)
-    obj['Low'] = convert(float(obj['Low']), exchange)
-    obj['Close'] = convert(float(obj['Close']), exchange)
-    obj['Adj Close'] = convert(float(obj['Adj Close']), exchange)
+    for obj in stocks:
+        obj['Open'] = convert(float(obj['Open']), exchange)
+        obj['High'] = convert(float(obj['High']), exchange)
+        obj['Low'] = convert(float(obj['Low']), exchange)
+        obj['Close'] = convert(float(obj['Close']), exchange)
+        obj['Adj Close'] = convert(float(obj['Adj Close']), exchange)
 
-def convert_prices_an_roman(obj: dict):
+def convert_prices_an_roman(stocks):
     """converts curreny values as per exchange rates in Dict object"""
-    obj['Open'] = dollar_to_ancient_roman(float(obj['Open']))
-    obj['High'] = dollar_to_ancient_roman(float(obj['High']))
-    obj['Low'] = dollar_to_ancient_roman(float(obj['Low']))
-    obj['Close'] = dollar_to_ancient_roman(float(obj['Close']))
-    obj['Adj Close'] = dollar_to_ancient_roman(float(obj['Adj Close']))
+    for obj in stocks:
+        obj['Open'] = dollar_to_ancient_roman(float(obj['Open']))
+        obj['High'] = dollar_to_ancient_roman(float(obj['High']))
+        obj['Low'] = dollar_to_ancient_roman(float(obj['Low']))
+        obj['Close'] = dollar_to_ancient_roman(float(obj['Close']))
+        obj['Adj Close'] = dollar_to_ancient_roman(float(obj['Adj Close']))

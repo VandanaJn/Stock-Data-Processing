@@ -28,7 +28,7 @@ class TestPipeLine(unittest.TestCase):
         run('source', 'dest', 'pound')
         mock_convert_prices_an.assert_not_called()
         mock_parent.assert_has_calls([call.a('source'), call.c(
-            obj1, 0.7578), call.c(obj2, 0.7578), call.b('dest', objects1)])
+            objects1, 0.7578), call.b('dest', objects1)])
 
     @patch('PipeLine.convert_prices_an_roman')
     @patch('PipeLine.convert_prices')
@@ -50,8 +50,7 @@ class TestPipeLine(unittest.TestCase):
         run('source', 'dest', 'roman')
         mock_convert_prices.assert_not_called()
         mock_parent.assert_has_calls([call.a('source'), call.d(
-            obj1), call.d(obj2), call.b('dest', objects1)])
-
+            objects1), call.b('dest', objects1)])
 
 if __name__ == '__main__':
     unittest.main(exit=False)

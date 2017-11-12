@@ -3,6 +3,7 @@ import unittest
 import collections
 from CurrConvert import int_to_roman, dollar_to_ancient_roman, convert, convert_prices, convert_prices_an_roman
 
+
 class TestCurrConvert(unittest.TestCase):
     '''TestCurrConvert - Tests CurrConvert'''
 
@@ -93,7 +94,10 @@ class TestCurrConvert(unittest.TestCase):
         obj1 = collections.OrderedDict(
             [('Date', '2016-08-01'), ('Open', '30'), ('High', '50'), ('Low', '20'),
              ('Close', '25'), ('Adj Close', '30'), ('Volume', '100')])
-        convert_prices(obj1, 2)
+        obj2 = collections.OrderedDict(
+            [('Date', '2016-08-01'), ('Open', '90'), ('High', '50'), ('Low', '20'),
+             ('Close', '70'), ('Adj Close', '30'), ('Volume', '100')])
+        convert_prices([obj1, obj2], 2)
         self.assertEqual('2016-08-01', obj1["Date"])
         self.assertEqual(60, obj1["Open"])
         self.assertEqual(100, obj1["High"])
@@ -101,6 +105,8 @@ class TestCurrConvert(unittest.TestCase):
         self.assertEqual(50, obj1["Close"])
         self.assertEqual(60, obj1["Adj Close"])
         self.assertEqual('100', obj1["Volume"])
+        self.assertEqual(180, obj2["Open"])
+        self.assertEqual(140, obj2["Close"])
 
     def test_convert_prices_an_roman(self):
         """test_convert_prices - should convert prices for dictionary object"""
@@ -108,7 +114,10 @@ class TestCurrConvert(unittest.TestCase):
         obj1 = collections.OrderedDict(
             [('Date', '2016-08-01'), ('Open', '30.5'), ('High', '50'), ('Low', '20'),
              ('Close', '25'), ('Adj Close', '35'), ('Volume', '100')])
-        convert_prices_an_roman(obj1)
+        obj2 = collections.OrderedDict(
+            [('Date', '2016-08-01'), ('Open', '30'), ('High', '50'), ('Low', '20'),
+             ('Close', '40'), ('Adj Close', '35'), ('Volume', '100')])
+        convert_prices_an_roman([obj1, obj2])
         self.assertEqual('2016-08-01', obj1["Date"])
         self.assertEqual("XXX rocks and V pebbles", obj1["Open"])
         self.assertEqual("L rocks", obj1["High"])
@@ -116,6 +125,9 @@ class TestCurrConvert(unittest.TestCase):
         self.assertEqual("XXV rocks", obj1["Close"])
         self.assertEqual("XXXV rocks", obj1["Adj Close"])
         self.assertEqual('100', obj1["Volume"])
+        self.assertEqual("XXX rocks", obj2["Open"])
+        self.assertEqual("XL rocks", obj2["Close"])
+
 
 if __name__ == '__main__':
     unittest.main(exit=False)
